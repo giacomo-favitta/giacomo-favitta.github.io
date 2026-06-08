@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giacomo Favitta — Musician, Guitarist, Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400&family=Spline+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#070512;
+  --deep:#0d0a26;
+  --indigo:#1a1247;
+  --violet:#6d4fd6;
+  --lavender:#b3a3f0;
+  --lilac:#d9d0ff;
+  --star:#f4f1ff;
+  --glow:rgba(149,114,255,.55);
+  --line:rgba(179,163,240,.22);
+  --display:"Fraunces",Georgia,serif;
+  --body:"Spline Sans",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void);
+  color:var(--lilac);
+  font-family:var(--body);
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+  position:relative;
+}
+/* ---------- STARFIELD ---------- */
+.stars,.stars2,.stars3{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+}
+.stars{background-image:radial-gradient(1px 1px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 70% 80%,#fff,transparent),radial-gradient(1px 1px at 40% 60%,#cbbdff,transparent),radial-gradient(1px 1px at 90% 20%,#fff,transparent),radial-gradient(1px 1px at 10% 90%,#fff,transparent);background-repeat:repeat;background-size:300px 300px;opacity:.5;animation:drift 200s linear infinite}
+.stars2{background-image:radial-gradient(1px 1px at 55% 15%,#fff,transparent),radial-gradient(1px 1px at 25% 75%,#b3a3f0,transparent),radial-gradient(1px 1px at 85% 55%,#fff,transparent);background-repeat:repeat;background-size:420px 420px;opacity:.35;animation:drift 320s linear infinite reverse}
+.stars3{background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(109,79,214,.35),transparent 70%),radial-gradient(ellipse 60% 40% at 80% 110%,rgba(80,50,180,.25),transparent 70%)}
+@keyframes drift{from{transform:translateY(0)}to{transform:translateY(-300px)}}
+/* ---------- LANG SWITCH ---------- */
+.lang{position:fixed;top:24px;right:24px;z-index:50;display:flex;gap:4px;background:rgba(13,10,38,.6);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:999px;padding:5px}
+.lang button{font-family:var(--body);font-size:12px;letter-spacing:.1em;font-weight:500;color:var(--lavender);background:none;border:none;padding:7px 14px;border-radius:999px;cursor:pointer;transition:.3s}
+.lang button.active{background:var(--violet);color:#fff;box-shadow:0 0 16px var(--glow)}
+.lang button:hover:not(.active){color:#fff}
+/* ---------- WRAP ---------- */
+.wrap{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:0 28px}
+/* ---------- HERO ---------- */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative}
+.orbit{position:absolute;border:1px solid var(--line);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none}
+.o1{width:340px;height:340px;animation:spin 60s linear infinite}
+.o2{width:520px;height:520px;animation:spin 90s linear infinite reverse}
+.o3{width:720px;height:720px;animation:spin 130s linear infinite}
+.orbit::before{content:"";position:absolute;width:7px;height:7px;background:var(--lavender);border-radius:50%;top:-3px;left:50%;box-shadow:0 0 12px var(--glow)}
+@keyframes spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.portrait{width:190px;height:190px;border-radius:50%;object-fit:cover;border:2px solid var(--lavender);box-shadow:0 0 50px var(--glow),inset 0 0 30px rgba(0,0,0,.4);position:relative;z-index:3;margin-bottom:34px;background:linear-gradient(145deg,var(--indigo),var(--deep));display:flex;align-items:center;justify-content:center;color:var(--lavender);font-size:13px;letter-spacing:.05em;text-align:center;opacity:0;animation:rise 1s .2s forwards}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(3rem,9vw,6.2rem);line-height:.95;color:var(--star);letter-spacing:-.02em;position:relative;z-index:3;opacity:0;animation:rise 1s .4s forwards}
+.tag{font-size:clamp(.95rem,2.4vw,1.3rem);letter-spacing:.42em;text-transform:uppercase;color:var(--lavender);margin-top:22px;font-weight:300;position:relative;z-index:3;opacity:0;animation:rise 1s .6s forwards}
+.scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--lavender);opacity:.6;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+.portrait,h1,.tag{transform:translateY(24px)}
+/* ---------- SECTIONS ---------- */
+section.block{padding:120px 0;position:relative}
+.shead{display:flex;align-items:center;gap:22px;margin-bottom:60px}
+.shead h2{font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,5vw,3rem);color:var(--star);white-space:nowrap}
+.shead .ln{height:1px;flex:1;background:linear-gradient(90deg,var(--violet),transparent)}
+.shead .num{font-family:var(--display);font-size:1rem;color:var(--violet);border:1px solid var(--line);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
+.card{background:linear-gradient(160deg,rgba(26,18,71,.5),rgba(13,10,38,.3));border:1px solid var(--line);border-radius:18px;padding:30px;transition:.45s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--lavender),transparent);opacity:0;transition:.45s}
+.card:hover{transform:translateY(-6px);border-color:rgba(179,163,240,.5);box-shadow:0 18px 50px -20px var(--glow)}
+.card:hover::before{opacity:1}
+.card .yr{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--violet);font-weight:500;margin-bottom:10px}
+.card h3{font-family:var(--display);font-weight:500;font-size:1.35rem;color:var(--star);margin-bottom:12px}
+.card p{font-size:.95rem;color:var(--lavender)}
+.skill-row{display:flex;gap:20px;align-items:flex-start;padding:24px 0;border-bottom:1px solid var(--line)}
+.skill-row:last-child{border:none}
+.skill-row .idx{font-family:var(--display);font-size:2rem;color:var(--violet);line-height:1;min-width:48px}
+.skill-row h3{font-family:var(--display);font-weight:500;font-size:1.3rem;color:var(--star);margin-bottom:6px}
+.skill-row p{font-size:.95rem;color:var(--lavender)}
+/* ---------- FOOTER ---------- */
+footer{padding:90px 0 60px;text-align:center;position:relative;z-index:2}
+footer .sig{font-family:var(--display);font-size:2.6rem;color:var(--violet);margin-bottom:18px}
+footer p{font-size:.9rem;color:var(--lavender);letter-spacing:.1em}
+/* ---------- REVEAL ---------- */
+.reveal{opacity:0;transform:translateY(40px);transition:.9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:600px){.o3{display:none}section.block{padding:80px 0}.lang{top:14px;right:14px}}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="stars3"></div>
+
+<nav class="lang">
+  <button data-lang="it" class="active">IT</button>
+  <button data-lang="en">EN</button>
+  <button data-lang="es">ES</button>
+</nav>
+
+<header class="hero">
+  <div class="orbit o1"></div>
+  <div class="orbit o2"></div>
+  <div class="orbit o3"></div>
+  <!-- Per mostrare la tua foto: carica un file chiamato "ritratto.jpg" nella cartella img/
+       e sostituisci il blocco <div class="portrait"> qui sotto con:
+       <img class="portrait" src="img/ritratto.jpg" alt="Giacomo Favitta"> -->
+  <div class="portrait" data-k="photo">La tua foto<br>(img/ritratto.jpg)</div>
+  <h1>Giacomo Favitta</h1>
+  <p class="tag" data-k="role">Musician · Guitarist · Artist</p>
+  <div class="scroll-hint" data-k="scroll">Scorri ↓</div>
+</header>
+
+<main class="wrap">
+
+  <section class="block reveal" id="edu">
+    <div class="shead"><span class="num">01</span><h2 data-k="edu_t">Formazione</h2><span class="ln"></span></div>
+    <div class="grid">
+      <div class="card"><div class="yr">2025—2026</div><h3 data-k="edu1_t">Studi musicali</h3><p data-k="edu1_p"></p></div>
+      <div class="card"><div class="yr">2025—2026</div><h3 data-k="edu2_t">Studi di chitarra</h3><p data-k="edu2_p"></p></div>
+      <div class="card"><div class="yr">2025—2026</div><h3 data-k="edu3_t">Sviluppo artistico</h3><p data-k="edu3_p"></p></div>
+    </div>
+  </section>
+
+  <section class="block reveal" id="exp">
+    <div class="shead"><span class="num">02</span><h2 data-k="exp_t">Esperienza professionale</h2><span class="ln"></span></div>
+    <div class="grid">
+      <div class="card"><div class="yr">2025—2026</div><h3 data-k="exp1_t">Esibizioni live</h3><p data-k="exp1_p"></p></div>
+      <div class="card"><div class="yr">2025—2026</div><h3 data-k="exp2_t">Registrazioni in studio</h3><p data-k="exp2_p"></p></div>
+      <div class="card"><div class="yr">2025—2026</div><h3 data-k="exp3_t">Collaborazioni musicali</h3><p data-k="exp3_p"></p></div>
+    </div>
+  </section>
+
+  <section class="block reveal" id="skills">
+    <div class="shead"><span class="num">03</span><h2 data-k="sk_t">Competenze</h2><span class="ln"></span></div>
+    <div class="skill-row"><span class="idx">1</span><div><h3 data-k="sk1_t">Performance chitarristica</h3><p data-k="sk1_p"></p></div></div>
+    <div class="skill-row"><span class="idx">2</span><div><h3 data-k="sk2_t">Composizione</h3><p data-k="sk2_p"></p></div></div>
+    <div class="skill-row"><span class="idx">3</span><div><h3 data-k="sk3_t">Improvvisazione</h3><p data-k="sk3_p"></p></div></div>
+  </section>
+
+</main>
+
+<footer class="reveal">
+  <div class="sig">Á!</div>
+  <p data-k="foot">© 2026 Giacomo Favitta</p>
+</footer>
+
+<script>
+const T={
+ it:{photo:"La tua foto<br>(img/ritratto.jpg)",role:"Musicista · Chitarrista · Artista",scroll:"Scorri ↓",
+  edu_t:"Formazione",
+  edu1_t:"Studi musicali",edu1_p:"Formazione principalmente in Musica Classica (Claudio Maccari) e Jazz (Valerio Silvestro, Loredana Lubrano). Esplorazione da autodidatta di rock, metal, hip-hop e soul.",
+  edu2_t:"Studi di chitarra",edu2_p:"Chitarra classica (Claudio Maccari, Paolo Pugliese, Guido Fichtner). Chitarra elettrica (Alessandro Sebastiani, Marco Galiero). A suo agio anche con l'acustica.",
+  edu3_t:"Sviluppo artistico",edu3_p:"Esplorazione culturale che collega artigianato, arti, consapevolezza corporea e pratiche terapeutiche e fisiche. Un percorso geografico e storico in continua evoluzione.",
+  exp_t:"Esperienza professionale",
+  exp1_t:"Esibizioni live",exp1_p:"Sale da concerto, palchi, pub, locali notturni, livehouse e spazi all'aperto. Esperienza in molteplici stili musicali.",
+  exp2_t:"Registrazioni in studio",exp2_p:"Apple Sauce (mixato e masterizzato da Federico Ascari, special guest Ralph Salati).",
+  exp3_t:"Collaborazioni musicali",exp3_p:"Collaborazioni con artisti e musicisti di diversi Paesi e background musicali.",
+  sk_t:"Competenze",
+  sk1_t:"Performance chitarristica",sk1_p:"Performance solista, in duo, trio, big band e contesti orchestrali.",
+  sk2_t:"Composizione",sk2_p:"Composizione e arrangiamento, con forte attenzione alla struttura musicale.",
+  sk3_t:"Improvvisazione",sk3_p:"Sviluppo del vocabolario melodico attraverso ricerca, ascolto e continua autoanalisi.",
+  foot:"© 2026 Giacomo Favitta"},
+ en:{photo:"Your photo<br>(img/ritratto.jpg)",role:"Musician · Guitarist · Artist",scroll:"Scroll ↓",
+  edu_t:"Education",
+  edu1_t:"Music training",edu1_p:"Trained mainly in Classical Music (Claudio Maccari) and Jazz (Valerio Silvestro, Loredana Lubrano). Self-taught exploration of rock, metal, hip-hop and soul.",
+  edu2_t:"Guitar studies",edu2_p:"Classical guitar (Claudio Maccari, Paolo Pugliese, Guido Fichtner). Electric guitar (Alessandro Sebastiani, Marco Galiero). Confident with acoustic too.",
+  edu3_t:"Artistic development",edu3_p:"Cultural exploration connecting crafts, arts, body awareness, and therapeutic and physical practices. An ongoing geographic and historical journey.",
+  exp_t:"Professional Experience",
+  exp1_t:"Live performances",exp1_p:"Concert halls, stages, pubs, nightclubs, livehouses and outdoor venues. Experience across multiple musical styles.",
+  exp2_t:"Studio recordings",exp2_p:"Apple Sauce (mixed and mastered by Federico Ascari, special guest Ralph Salati).",
+  exp3_t:"Musical collaborations",exp3_p:"Collaborations with artists and musicians from different countries and musical backgrounds.",
+  sk_t:"Skills",
+  sk1_t:"Guitar performance",sk1_p:"Solo performance, duo, trio, big band and orchestral contexts.",
+  sk2_t:"Composition",sk2_p:"Composition and arranging, with a strong focus on musical structure.",
+  sk3_t:"Improvisation",sk3_p:"Developing melodic vocabulary through research, listening and continuous self-analysis.",
+  foot:"© 2026 Giacomo Favitta"},
+ es:{photo:"Tu foto<br>(img/ritratto.jpg)",role:"Músico · Guitarrista · Artista",scroll:"Desplázate ↓",
+  edu_t:"Formación",
+  edu1_t:"Estudios musicales",edu1_p:"Formación principalmente en Música Clásica (Claudio Maccari) y Jazz (Valerio Silvestro, Loredana Lubrano). Exploración autodidacta de rock, metal, hip-hop y soul.",
+  edu2_t:"Estudios de guitarra",edu2_p:"Guitarra clásica (Claudio Maccari, Paolo Pugliese, Guido Fichtner). Guitarra eléctrica (Alessandro Sebastiani, Marco Galiero). Cómodo también con la acústica.",
+  edu3_t:"Desarrollo artístico",edu3_p:"Exploración cultural que conecta artesanías, artes, conciencia corporal y prácticas terapéuticas y físicas. Un recorrido geográfico e histórico en constante evolución.",
+  exp_t:"Experiencia profesional",
+  exp1_t:"Actuaciones en vivo",exp1_p:"Salas de conciertos, escenarios, pubs, discotecas, livehouses y espacios al aire libre. Experiencia en múltiples estilos musicales.",
+  exp2_t:"Grabaciones en estudio",exp2_p:"Apple Sauce (mezclado y masterizado por Federico Ascari, invitado especial Ralph Salati).",
+  exp3_t:"Colaboraciones musicales",exp3_p:"Colaboraciones con artistas y músicos de diferentes países y trasfondos musicales.",
+  sk_t:"Habilidades",
+  sk1_t:"Interpretación de guitarra",sk1_p:"Actuación en solitario, dúo, trío, big band y contextos orquestales.",
+  sk2_t:"Composición",sk2_p:"Composición y arreglos, con un fuerte enfoque en la estructura musical.",
+  sk3_t:"Improvisación",sk3_p:"Desarrollo del vocabulario melódico mediante investigación, escucha y autoanálisis continuo.",
+  foot:"© 2026 Giacomo Favitta"}
+};
+function setLang(l){
+  document.documentElement.lang=l;
+  document.querySelectorAll('[data-k]').forEach(el=>{if(T[l][el.dataset.k]!==undefined)el.innerHTML=T[l][el.dataset.k];});
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+setLang('it');
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
