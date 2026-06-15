@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giacomo Favitta — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400&family=Spline+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stars"></div><div class="stars2"></div><div class="neb"></div>
+<div class="topnav"><a href="index.html">← <span data-t="nav_home">Home</span></a></div>
+
+<header class="phead">
+  <div class="orbit o1"></div><div class="orbit o2"></div>
+  <h1 data-t="door_por">Portfolio</h1>
+  <p class="role" id="sub"></p>
+</header>
+
+<main class="wrap">
+  <section class="block reveal"><div class="shead"><span class="num">01</span><h2 id="t_solo"></h2><span class="ln"></span></div>
+    <div class="grid">
+      <div class="card"><h3 id="solo_v"></h3>
+        <!-- VIDEO YOUTUBE: sostituisci VIDEO_ID con il codice del tuo video YouTube.
+             Es: per youtu.be/abc123 metti abc123. Poi togli "media-ph" e usa l'iframe sotto. -->
+        <div class="media-ph" id="solo_vph"></div>
+        <!-- <iframe class="media" src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+      </div>
+      <div class="card"><h3 id="solo_a"></h3>
+        <!-- SOUNDCLOUD: vai sul brano → Share → Embed → copia il link dentro url=...
+             poi togli "media-ph sc-ph" e usa l'iframe sotto. -->
+        <div class="media-ph sc-ph" id="solo_aph"></div>
+        <!-- <iframe class="media sc-ph" scrolling="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=SOUNDCLOUD_TRACK_URL&color=%236d4fd6"></iframe> -->
+      </div>
+    </div>
+  </section>
+
+  <section class="block reveal"><div class="shead"><span class="num">02</span><h2 id="t_duo"></h2><span class="ln"></span></div>
+    <div class="grid">
+      <div class="card"><h3 id="duo_v"></h3><div class="media-ph" id="duo_vph"></div></div>
+      <div class="card"><h3 id="duo_a"></h3><div class="media-ph sc-ph" id="duo_aph"></div></div>
+    </div>
+  </section>
+
+  <section class="block reveal"><div class="shead"><span class="num">03</span><h2 id="t_trio"></h2><span class="ln"></span></div>
+    <div class="grid">
+      <div class="card"><h3 id="trio_v"></h3><div class="media-ph" id="trio_vph"></div></div>
+      <div class="card"><h3 id="trio_a"></h3><div class="media-ph sc-ph" id="trio_aph"></div></div>
+    </div>
+  </section>
+
+  <section class="block reveal"><div class="cta"><h2 data-t="cta_h"></h2><p id="por_cta"></p><div class="btns"><a class="btn primary" id="mailbtn"></a><a class="btn ghost" id="callbtn"></a></div></div></section>
+</main>
+
+<footer><div class="sig">Á!</div><p>© 2026 Giacomo Favitta</p></footer>
+
+<script src="i18n.js"></script>
+<script>
+const PORT={
+  it:{sub:"Progetti — Solista · Duo · Trio",solo:"Solista",duo:"Duo",trio:"Trio",video:"Video",audio:"Audio",ph_v:"Spazio per il video YouTube — incolla il link nel codice",ph_a:"Spazio per il brano SoundCloud — incolla il link nel codice",cta:"Vuoi una formazione solista, in duo o in trio per il tuo evento? Discutiamo il progetto insieme."},
+  en:{sub:"Projects — Solo · Duo · Trio",solo:"Solo",duo:"Duo",trio:"Trio",video:"Video",audio:"Audio",ph_v:"Space for the YouTube video — paste the link in the code",ph_a:"Space for the SoundCloud track — paste the link in the code",cta:"Want a solo, duo or trio line-up for your event? Let's discuss the project together."},
+  es:{sub:"Proyectos — Solista · Dúo · Trío",solo:"Solista",duo:"Dúo",trio:"Trío",video:"Vídeo",audio:"Audio",ph_v:"Espacio para el vídeo de YouTube — pega el enlace en el código",ph_a:"Espacio para el tema de SoundCloud — pega el enlace en el código",cta:"¿Quieres una formación solista, dúo o trío para tu evento? Hablemos del proyecto juntos."}
+};
+function render(l){
+  const t=PORT[l];
+  document.getElementById('sub').textContent=t.sub;
+  document.getElementById('t_solo').textContent=t.solo;
+  document.getElementById('t_duo').textContent=t.duo;
+  document.getElementById('t_trio').textContent=t.trio;
+  ['solo','duo','trio'].forEach(s=>{
+    document.getElementById(s+'_v').textContent=t.video;
+    document.getElementById(s+'_a').textContent=t.audio;
+    document.getElementById(s+'_vph').textContent=t.ph_v;
+    document.getElementById(s+'_aph').textContent=t.ph_a;
+  });
+  document.getElementById('por_cta').textContent=t.cta;
+  document.getElementById('mailbtn').textContent='✉ '+I18N[l].cta_mail;
+  document.getElementById('mailbtn').href='mailto:'+CONTACT.email;
+  document.getElementById('callbtn').textContent='☎ '+CONTACT.phone;
+  document.getElementById('callbtn').href='tel:'+CONTACT.phoneHref;
+}
+initLang(render);
+revealInit();
+</script>
+</body>
+</html>

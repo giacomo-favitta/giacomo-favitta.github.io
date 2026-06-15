@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giacomo Favitta — Musicista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400&family=Spline+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-profile="musicista">
+<div class="stars"></div><div class="stars2"></div><div class="neb"></div>
+<div class="topnav"><a href="index.html">← <span data-t="nav_home">Home</span></a></div>
+
+<header class="phead">
+  <div class="orbit o1"></div><div class="orbit o2"></div>
+  <!-- FOTO: metti ritratto.jpg nella stessa cartella e sostituisci il div con:
+       <img class="portrait" src="ritratto.jpg" alt="Giacomo Favitta"> -->
+  <div class="portrait">La tua foto<br>(ritratto.jpg)</div>
+  <h1>Giacomo Favitta</h1>
+  <p class="role" id="role"></p>
+</header>
+
+<main class="wrap">
+  <section class="block reveal"><div class="shead"><span class="num">01</span><h2 data-t="s_skills">Competenze</h2><span class="ln"></span></div><div id="skills" class="grid"></div></section>
+  <section class="block reveal"><div class="shead"><span class="num">02</span><h2 data-t="s_exp">Esperienza</h2><span class="ln"></span></div><div id="exp" class="grid"></div></section>
+  <section class="block reveal"><div class="shead"><span class="num">03</span><h2 data-t="s_edu">Formazione</h2><span class="ln"></span></div><div id="edu"></div></section>
+  <section class="block reveal"><div class="cta"><h2 data-t="cta_h"></h2><p data-t="cta_p"></p><div class="btns"><a class="btn primary" id="mailbtn"></a><a class="btn ghost" id="callbtn"></a></div></div></section>
+</main>
+
+<footer><div class="sig">Á!</div><p>© 2026 Giacomo Favitta</p></footer>
+
+<script src="i18n.js"></script>
+<script>
+const KEY=document.body.dataset.profile;
+function render(l){
+  const P=PROFILES[KEY];
+  document.getElementById('role').textContent=P.role[l];
+  document.getElementById('skills').innerHTML=P.skills[l].map((s,i)=>
+    `<div class="card"><div class="yr">0${i+1}</div><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join('');
+  document.getElementById('exp').innerHTML=P.exp[l].map(e=>
+    `<div class="card"><div class="yr">${e[0]}</div><div class="loc">${e[1]}</div><h3>${e[2]}</h3><p>${e[3]}</p></div>`).join('');
+  const ed=I18N[l].edu;
+  document.getElementById('edu').innerHTML=[ed.music,ed.guitar,ed.vbp].map(x=>
+    `<div class="eduline"><div class="ekey">${x.k}</div><p>${x.v}</p></div>`).join('');
+  document.getElementById('mailbtn').textContent='✉ '+I18N[l].cta_mail;
+  document.getElementById('mailbtn').href='mailto:'+CONTACT.email;
+  document.getElementById('callbtn').textContent='☎ '+CONTACT.phone;
+  document.getElementById('callbtn').href='tel:'+CONTACT.phoneHref;
+}
+initLang(render);
+revealInit();
+</script>
+</body>
+</html>

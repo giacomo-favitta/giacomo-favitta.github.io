@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giacomo Favitta — Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400&family=Spline+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stars"></div><div class="stars2"></div><div class="neb"></div>
+<div class="topnav"><a href="index.html">← <span data-t="nav_home">Home</span></a></div>
+
+<header class="phead" style="min-height:46vh">
+  <div class="orbit o1"></div>
+  <h1 data-t="door_blog">Blog</h1>
+  <p class="role" id="sub"></p>
+</header>
+
+<main class="wrap" style="padding-bottom:60px">
+  <div id="list" class="post-list reveal in"></div>
+  <article id="single" class="article" style="display:none">
+    <a class="back" href="#" id="backbtn"></a>
+    <div id="content"></div>
+  </article>
+</main>
+
+<footer><div class="sig">Á!</div><p>© 2026 Giacomo Favitta</p></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="i18n.js"></script>
+<script>
+const BLOG={
+  it:{sub:"Diario personale e pensieri",empty:"Nessun articolo ancora. Torna presto!",back:"← Tutti gli articoli",loaderr:"Impossibile caricare l'articolo."},
+  en:{sub:"Personal journal and thoughts",empty:"No articles yet. Come back soon!",back:"← All articles",loaderr:"Could not load the article."},
+  es:{sub:"Diario personal y pensamientos",empty:"Aún no hay artículos. ¡Vuelve pronto!",back:"← Todos los artículos",loaderr:"No se pudo cargar el artículo."}
+};
+let POSTS=[];
+function render(l){
+  document.getElementById('sub').textContent=BLOG[l].sub;
+  document.getElementById('backbtn').textContent=BLOG[l].back;
+  drawList(l);
+}
+function drawList(l){
+  const box=document.getElementById('list');
+  if(!POSTS.length){ box.innerHTML='<p class="muted">'+BLOG[l].empty+'</p>'; return; }
+  box.innerHTML=POSTS.map((p,i)=>
+    `<div class="post" onclick="openPost(${i})"><div class="date">${p.date||''}</div><h3>${p.title||''}</h3><p class="ex">${p.excerpt||''}</p></div>`).join('');
+}
+async function openPost(i){
+  const p=POSTS[i];
+  try{
+    const r=await fetch('articoli/'+p.file);
+    if(!r.ok) throw 0;
+    const md=await r.text();
+    document.getElementById('content').innerHTML=marked.parse(md);
+  }catch(e){
+    document.getElementById('content').innerHTML='<p class="muted">'+BLOG[CURRENT].loaderr+'</p>';
+  }
+  document.getElementById('list').style.display='none';
+  document.getElementById('single').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.getElementById('backbtn').onclick=(e)=>{e.preventDefault();document.getElementById('single').style.display='none';document.getElementById('list').style.display='flex';};
+
+async function loadPosts(){
+  try{
+    const r=await fetch('articoli/lista.json');
+    POSTS=await r.json();
+  }catch(e){ POSTS=[]; }
+  drawList(CURRENT);
+}
+initLang(render);
+loadPosts();
+</script>
+</body>
+</html>
